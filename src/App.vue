@@ -35,7 +35,7 @@ body {
   font-size: 18px;
   line-height: 1.8;
   margin: 0;
-  background: rebeccapurple;
-  color: white;
+  background: white;
+  color: #442255;
 }
 </style>
