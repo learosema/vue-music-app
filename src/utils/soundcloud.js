@@ -1,4 +1,4 @@
-import { clientId } from './soundcloud.config';
+import { clientId } from '../../soundcloud.config';
 
 export const resolve = async url => {
   const response = await fetch(

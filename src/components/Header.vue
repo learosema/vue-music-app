@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <div class="header__logo">
+    <div class="header__top">
+      <div class="header__logo">
       <svg viewBox="0 0 64 128" width="64" height="64">
         <path d="M16,16l50,50l-50,50Z" stroke="deepskyblue" fill="gold" stroke-width="2" stroke-linecap="bevel" />
         <path d="M28,46l20,20l-20,20Z" stroke="hotpink" stroke-width="2" stroke-linecap="bevel" />
@@ -15,8 +16,26 @@
       </div>
     </nav>
   </div>
+  <div class="header__bottom">
+    
+    <h2>{{ title }}</h2>
+    <p>{{ description }}</p>
+    
+  </div>
+</div>
+    
 </template>
+<script>
+export default {
+  props: {
+    title: String,
+    description: String
+  }
+}
+</script>
+
 <style>
+
 
 .header {
   z-index: 1;
@@ -27,8 +46,21 @@
   background: black;
   color: white;
   font-family: sans-serif;
+}
+
+.header__top {
+  margin: 0 auto;
   display: flex;
   align-items: center;
+}
+
+.header__bottom {
+  background: #663399;
+  padding: 16px;
+}
+
+.header__bottom p, .header__bottom h2 {
+  margin: 0;
 }
 
 .header__title, .headler__logo {

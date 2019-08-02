@@ -1,10 +1,5 @@
 <template>
 <main class="playlist">
-  <div class="playlist__header">
-    <h2>{{ title }}</h2>
-    <p>{{ description }}</p>
-  </div>
-
   <ul class="playlist__tracks">
     <li :key="index" v-for="(track, index) in tracks">
       <img :src="track.artwork_url">
@@ -31,18 +26,6 @@ export default {
   overflow-y: auto;
 }
 
-.playlist__header {
-  
-  background: darkorchid;
-  opacity: .95;
-  color: #fff;
-  padding: 8px 16px;
-}
-
-.playlist__header h2 {
-  margin: 0;
-}
-
 ul.playlist__tracks {
   padding: 0;
   margin: 16px;
@@ -61,6 +44,12 @@ ul.playlist__tracks li {
 ul.playlist__tracks img {
   float: left;
   padding: 0 16px 16px 0;
+}
+
+p::after {
+  content: '';
+  display: block;
+  clear: left;
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header/>
-    <Main :title="title" :tracks="tracks" :description="description" />
+    <Header :title="title" :description="description" />
+    <Main :tracks="tracks"  />
   </div>
 </template>
 
