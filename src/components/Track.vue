@@ -56,10 +56,6 @@ export default {
   width: 100%;
 }
 
-
-
-
-
 .track h2, 
 .track p {
   color: #fff;
