@@ -2,7 +2,7 @@
 <div class="playlist">
   <ul class="playlist__tracks">
     <li :key="index" v-for="(track, index) in tracks">
-      <a :class="{selected: (selectedTrack && track.title == selectedTrack.title)}" href="#" @click="onSelect(track)">
+      <a :class="{selected: (selectedTrack && track.title == selectedTrack.title)}" href="#" @click.prevent="onSelect(track)">
         <img :src="track.artwork_url">
         <p>{{ track.title }}</p>
       </a>
