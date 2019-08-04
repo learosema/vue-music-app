@@ -4,7 +4,8 @@
       <img :src="backdropImage" alt="">
     </div>
     <div class="track__details" v-if="track">
-      <h3>{{ track.title }}</h3>
+      <h2>{{ track.title }}</h2>
+      <p>{{ track.description }}</p>
     </div>
   </div>
 </template>
@@ -37,19 +38,31 @@ export default {
 }
 
 .track__details {
+  position: relative;
+  margin: 16px;
+  padding: 8px;
   display: block;
-  background: rgba(0,0,0,.5);
+  text-shadow: 2px 2px #000;
+}
+
+.track__cover {
+  position: relative;
 }
 
 .track__cover img {
-  float: left;
-  margin-right: 16px;
-
+  position: absolute;
+  mix-blend-mode: multiply;
+  background: #777;
+  width: 100%;
 }
 
-.track h3, 
+
+
+
+
+.track h2, 
 .track p {
-  color: #0f0;
+  color: #fff;
   margin: 0;
 }
 
