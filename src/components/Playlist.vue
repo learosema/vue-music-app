@@ -2,7 +2,7 @@
 <div class="playlist">
   <ul class="playlist__tracks">
     <li :key="index" v-for="(track, index) in tracks">
-      <a href="#" @click="onSelect(track)">
+      <a :class="{selected: (selectedTrack && track.title == selectedTrack.title)}" href="#" @click="onSelect(track)">
         <img :src="track.artwork_url">
         <p>{{ track.title }}</p>
       </a>
@@ -16,10 +16,16 @@ export default {
   props: {
     title: String,
     description: String,
-    tracks: Array
+    tracks: Array,
+  },
+  data() {
+    return {
+      selectedTrack: null
+    }
   },
   methods: {
     onSelect(track) {
+      this.selectedTrack = track;
       this.$emit("select-track", track);
     }
   }
@@ -51,7 +57,8 @@ ul.playlist__tracks li a {
   align-items: flex-start;
 }
 
-ul.playlist__tracks li a:hover {
+ul.playlist__tracks li a:hover,
+ul.playlist__tracks li a.selected {
   background: #eee;
 }
 
