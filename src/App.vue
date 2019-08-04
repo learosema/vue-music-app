@@ -1,28 +1,33 @@
 <template>
   <div id="app">
     <Header :title="title" :description="description" />
-    <Main :tracks="tracks"  />
+    <main>
+      <Playlist :tracks="tracks" @select-track="selectTrack" />
+      <Track :track="currentTrack" />
+    </main>
   </div>
 </template>
-
 <script>
 import Header from './components/Header';
-import Main from './components/Main';
+import Playlist from './components/Playlist';
+import Track from './components/Track';
 import { resolve } from './utils/soundcloud';
 
-const PLAYLIST = "https://soundcloud.com/timpietrusky/sets/super-hot-shit";
+const PLAYLIST = 'https://soundcloud.com/timpietrusky/sets/super-hot-shit';
 
 export default {
   name: 'app',
   components: {
     Header,
-    Main
+    Playlist, 
+    Track
   },
   data() {
     return {
       title: "",
       description: "",
-      tracks: []
+      tracks: [],
+      currentTrack: null
     }
   },
   async mounted() {
@@ -31,6 +36,14 @@ export default {
     this.description = data.description;
     this.tracks = data.tracks;
     console.log(data);
+  },
+  methods: {
+    selectTrack(track) {
+      console.log(track);
+      if (track) {
+        this.currentTrack = track;
+      }
+    }
   }
 }
 </script>
@@ -48,11 +61,17 @@ body {
   font-size: 18px;
   line-height: 1.8;
   margin: 0;
-  color: white;
-  background: #221133;
+  color: #213;
+  background: #fff;
 }
 
 #app {
   margin: 0;
 }
+
+.playlist {
+  display: block;
+  width: 50%;
+}
+
 </style>

@@ -8,6 +8,3 @@ export const resolve = async url => {
   );
   return await response.json();
 };
-
-export const largerPic = url =>
-  (url || "").replace(/large\.jpg/, "t500x500.jpg");

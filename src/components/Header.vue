@@ -11,9 +11,9 @@
       <h1>Vue Music Player</h1>
     </div>
     <nav class="header__nav">
-      <div class="nav__burger">
+      <label class="nav__burger">
         <div class="nav__burger-icon"></div>
-      </div>
+      </label>
     </nav>
   </div>
   <div class="header__bottom">
@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style>
-
 
 .header {
   z-index: 1;
@@ -88,6 +87,7 @@ export default {
 
 .nav__burger {
   cursor: pointer;
+  display: block;
   right: 0;
   height: 48px;
   position: relative;
@@ -107,7 +107,7 @@ export default {
   width: 100%;
   height: 12px;
   background: linear-gradient(to bottom, skyblue 0%, skyblue 50%, pink 50%, pink 100%);
-  transform: translateY(-16px);
+  transform: translateY(-12px);
 }
 
 .nav__burger:hover .nav__burger-icon::before {
@@ -125,7 +125,7 @@ export default {
   height: 12px;
   background: linear-gradient(to top, skyblue 0%, skyblue 50%, pink 50%, pink 100%);
   
-  transform: translateY(12px);
+  transform: translateY(8px);
 }
 
 .nav__burger:hover .nav__burger-icon {
