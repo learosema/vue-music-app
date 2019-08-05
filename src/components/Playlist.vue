@@ -33,6 +33,9 @@ export default {
 </script>
 <style>
 .playlist {
+  display: block;
+  width: calc(100% - var(--track-pane-width));
+
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;

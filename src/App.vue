@@ -69,9 +69,5 @@ body {
   margin: 0;
 }
 
-.playlist {
-  display: block;
-  width: 50%;
-}
 
 </style>

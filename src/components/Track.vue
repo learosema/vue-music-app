@@ -27,13 +27,14 @@ export default {
 }
 </script>
 <style>
+
 .track {
   position: fixed;
-  top: 186px;
-  left: 50%;
+  top: var(--header-height);
+  left: calc(100% - var(--track-pane-width));
   right: 0;
-  height: calc(100vh - 186px);
-  background: #222;
+  height: calc(100vh - var(--header-height));
+  background: var(--track-background);
   display: block;
 }
 
@@ -51,6 +52,10 @@ export default {
 
 .track__cover img {
   position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -50%;
+  margin-top: -20%;
   mix-blend-mode: multiply;
   background: #777;
   width: 100%;

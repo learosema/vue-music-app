@@ -8,7 +8,7 @@
       </svg>
     </div>
     <div class="header__title">
-      <h1>Vue Music Player</h1>
+      <h1>{{ title }}</h1>
     </div>
     <nav class="header__nav">
       <label class="nav__burger">
@@ -17,8 +17,6 @@
     </nav>
   </div>
   <div class="header__bottom">
-    
-    <h2>{{ title }}</h2>
     <p>{{ description }}</p>
     
   </div>
@@ -42,24 +40,41 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  background: black;
+  background: var(--header-color);
   color: white;
   font-family: sans-serif;
 }
 
 .header__top {
   margin: 0 auto;
+  height: calc(var(--header-height) / 2);
   display: flex;
   align-items: center;
 }
 
 .header__bottom {
-  background: #663399;
+  background: var(--header-bottom-color);
+  display: flex;
+  align-items: center;
   padding: 16px;
+  height: calc(var(--header-height) / 2);
 }
 
-.header__bottom p, .header__bottom h2 {
+.header__bottom p {
+  display: block;
   margin: 0;
+  flex: 1 0;
+}
+
+.header__bottom nav {
+  flex: 0 1;
+}
+
+.header__bottom nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
 }
 
 .header__title, .headler__logo {
