@@ -6,12 +6,18 @@
     <div class="track__details" v-if="track">
       <h2>{{ track.title }}</h2>
       <p>{{ track.description }}</p>
+      <Controls />
     </div>
   </div>
 </template>
 <script>
+import Controls from './Controls';
+
 export default {
   name: "Track",
+  components: {
+    Controls
+  },
   props: {
     track: Object
   },
