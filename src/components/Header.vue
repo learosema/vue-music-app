@@ -17,14 +17,19 @@
     </nav>
   </div>
   <div class="header__bottom">
-    <p>{{ description }}</p>
-    
+    <Controls />
   </div>
 </div>
     
 </template>
 <script>
+import Controls from './Controls';
+
 export default {
+  name: "Header",
+  components: {
+    Controls
+  },
   props: {
     title: String,
     description: String
@@ -56,26 +61,10 @@ export default {
   background: var(--header-bottom-color);
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 4px 32px;
   height: calc(var(--header-height) / 2);
 }
 
-.header__bottom p {
-  display: block;
-  margin: 0;
-  flex: 1 0;
-}
-
-.header__bottom nav {
-  flex: 0 1;
-}
-
-.header__bottom nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-}
 
 .header__title, .headler__logo {
   flex: 0 1 auto;
