@@ -7,60 +7,85 @@ class AudioPlayer {
     this.audio = null;
     this.mediaSrc = null;
     this.gain = null;
+    this.endedCallbacks = [];
+    this.progressCallbacks = [];
   }
 
   initAudioContext() {
     if (! this.AC) {
-      this.AC = new AudioContext()
-      this.analyser = this.AC.createAnalyser()
-      this.analyser.fftSize = 512
-      this.buffer = new Uint8Array(this.analyser.frequencyBinCount)
-      this.analyser.connect(this.AC.destination)  
+      this.AC = new AudioContext();
+      this.analyser = this.AC.createAnalyser();
+      this.analyser.fftSize = 512;
+      this.buffer = new Uint8Array(this.analyser.frequencyBinCount);
+      this.analyser.connect(this.AC.destination);
     }
   }
 
-  fadeOut(fadeOutDelay) {
-    let lastAudio = this.audio
-    let lastMediaSrc = this.mediaSrc
-    let lastGain = this.gain
-    this.audio = null
-    this.mediaSrc = null
-    this.gain = null
+  muteAudio(fadeOutDelay) {
+    let lastAudio = this.audio;
+    let lastMediaSrc = this.mediaSrc;
+    let lastGain = this.gain;
+    this.audio = null;
+    this.mediaSrc = null;
+    this.gain = null;
     if (lastAudio) {
-      lastGain.gain.exponentialRampToValueAtTime(0.01, this.AC.currentTime + fadeOutDelay/1e3)
-      setTimeout(() => {        
-        lastAudio.pause()            
-        lastGain.disconnect()
-        lastMediaSrc.disconnect()
-      }, 10 + fadeOut)  
+      lastGain.gain.exponentialRampToValueAtTime(0.01, this.AC.currentTime + fadeOutDelay / 1e3);
+      setTimeout(() => {
+        lastAudio.pause();
+        lastGain.disconnect();
+        lastMediaSrc.disconnect();
+      }, fadeOutDelay);
     }
   }
+
+  onEnded(callback) {
+    this.endedCallbacks.push(callback);
+  }
+
+  onTimeUpdate(callback) {
+    this.progressCallbacks.push(callback);
+  }
+
+  get currentTime() {
+    if (this.audio) {
+      return this.audio.currentTime;
+    }
+    return NaN;
+  }
+
+  get duration() {
+    if (this.audio) {
+      return this.audio.duration;
+    }
+    return NaN;
+  }
+
 
   play(streamUrl) {
     this.initAudioContext();
     if (this.audio) {
-      this.muteAudio(3000)
+      this.muteAudio(0);
     }
-    if (index == this.currentIndex) {
-      // user pressed stop
-      this.currentIndex = -1 
-      return
-    }
-    this.currentIndex = index
-    this.audio = new Audio()
-    this.audio.crossOrigin = "anonymous"
-    this.audio.src = streamUrl + `?client_id=${clientId}`
+    this.audio = new Audio();
+    this.audio.crossOrigin = "anonymous";
+    this.audio.src = streamUrl + `?client_id=${clientId}`;
     // this.audio.playbackRate = 1.5
-    this.audio.play()
-    this.audio.onended = () => {
-      this.muteAudio(0)
-      this.currentIndex = -1 
-      // this.selectTrack((this.currentIndex + 1) % this.tracks.length)
+    this.audio.play();
+    this.audio.onended = (e) => {
+      this.muteAudio(0);
+      this.endedCallbacks.forEach(callback => {
+        callback(e);
+      });
+    }
+    this.audio.ontimeupdate = (e) => {
+      this.progressCallbacks.forEach(callback => {
+        callback(e);
+      });
     }
     this.mediaSrc = this.AC.createMediaElementSource(this.audio)
-    this.gain = this.AC.createGain()
-    this.mediaSrc.connect(this.gain)
-    this.gain.connect(this.analyser)      
+    this.gain = this.AC.createGain();
+    this.mediaSrc.connect(this.gain);
+    this.gain.connect(this.analyser);
   }
 }
 
