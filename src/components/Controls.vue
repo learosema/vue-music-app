@@ -8,6 +8,8 @@
           <path d="M39,16l50,50l-50,50Z" />
         </svg>
       </button>
+    </li>
+    <li>
       <button class="controls__button controls__button--pause" @click="$emit('pause-track')">
         <svg viewBox="0 0 128 128" width="48px" height="48px">
           <title>pause</title>
@@ -16,12 +18,19 @@
         </svg>
       </button>
     </li>
+    <li class="controls__menu-item--progress">
+      <progress class="controls__progress" max="100" value="33"></progress>
+    </li>
+    <li>
+      01:23
+    </li>
   </ul>
 </nav>
 </template>
 <style>
 .controls {
   display: flex;
+  flex: 1;
   align-items: center;
 }
 
@@ -34,6 +43,14 @@
   justify-content: flex-start;
   align-items: center;
   height: 100%;
+}
+
+.controls__menu li {
+  flex: 1;
+}
+
+.controls__menu li.controls__menu-item--progress {
+  flex: 3;
 }
 
 .controls__button {
@@ -67,6 +84,23 @@
   fill: white;
 }
 
+.controls__progress {
+  display: block;
+  width: 100%;
+  align-items: center;
+  appearance: none;
+  height: 8px;
+  
+  border: none;
+}
+
+.controls__progress[value]::-webkit-progress-bar {
+  background: #222;
+}
+
+.controls__progress[value]::-webkit-progress-value {
+  background: hotpink;
+}
 
 
 </style>

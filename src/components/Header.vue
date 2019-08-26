@@ -2,25 +2,20 @@
   <div class="header">
     <div class="header__top">
       <div class="header__logo">
-      <svg viewBox="0 0 64 128" width="64" height="64">
-        <path d="M16,16l50,50l-50,50Z" stroke="deepskyblue" fill="gold" stroke-width="2" stroke-linecap="bevel" />
-        <path d="M28,46l20,20l-20,20Z" stroke="hotpink" stroke-width="2" stroke-linecap="bevel" />
-      </svg>
+        <svg viewBox="0 0 64 128" width="64" height="64">
+          <path d="M16,16l50,50l-50,50Z" stroke="deepskyblue" fill="gold" stroke-width="2" stroke-linecap="bevel" />
+          <path d="M28,46l20,20l-20,20Z" stroke="hotpink" stroke-width="2" stroke-linecap="bevel" />
+        </svg>
+      </div>
+      <div class="header__title">
+        <h1 :title="description">{{ title }}</h1>
+        <h2 v-if="currentTrack">{{ currentTrack.title }} </h2>
+      </div>
     </div>
-    <div class="header__title">
-      <h1>{{ title }}</h1>
+    <div class="header__bottom">
+      <Controls @play-track="$emit('play-track')" @pause-track="$emit('pause-track')" />
     </div>
-    <nav class="header__nav">
-      <label class="nav__burger">
-        <div class="nav__burger-icon"></div>
-      </label>
-    </nav>
-  </div>
-  <div class="header__bottom">
-    <Controls @play-track="$emit('play-track')" @pause-track="$emit('pause-track')" />
-  </div>
-</div>
-    
+  </div>  
 </template>
 <script>
 import Controls from './Controls';
@@ -32,7 +27,8 @@ export default {
   },
   props: {
     title: String,
-    description: String
+    description: String,
+    currentTrack: Object
   }
 }
 </script>
@@ -70,74 +66,24 @@ export default {
   flex: 0 1 auto;
 }
 
-.header__nav {
-  flex: 1 0 auto;
-  margin-right: 16px;
-  display: flex;
-  justify-content: flex-end;
+.header__title {
+  align-items: center;
 }
 
-.header__title h1 {
-  font-size: 24px;
-  color: white;
-  margin: 0;
-}
-
-.nav {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 16px;
-}
-
-.nav__burger {
-  cursor: pointer;
+.header__title h1, h2 {
   display: block;
-  right: 0;
-  height: 48px;
-  position: relative;
-  width: 48px;
+  font-size: 16px;
+  margin: 0;
+  padding: 0 8px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.nav__burger-icon {
-  background: white;
-  height: 8px;
-  width: 100%;
-  transform: translateY(20px);
-}
+.header__title h2 {
 
-.nav__burger-icon::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 12px;
-  background: linear-gradient(to bottom, skyblue 0%, skyblue 50%, pink 50%, pink 100%);
-  transform: translateY(-12px);
-}
-
-.nav__burger:hover .nav__burger-icon::before {
-  transform: rotate(45deg);
-}
-
-.nav__burger-icon, .nav__burger-icon::after, .nav__burger-icon::before  {
-  transition: transform 250ms ease-in-out, background 500ms ease-in-out, height 250ms ease-in-out;
-}
-
-.nav__burger-icon::after {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 12px;
-  background: linear-gradient(to top, skyblue 0%, skyblue 50%, pink 50%, pink 100%);
-  
-  transform: translateY(8px);
-}
-
-.nav__burger:hover .nav__burger-icon {
-  background: transparent;
-}
-
-.nav__burger:hover .nav__burger-icon::after {
-  transform: rotate(-45deg);
+  color: deepskyblue;
 }
 
 </style>

@@ -1,9 +1,14 @@
 <template>
   <div id="app">
-    <Header :title="title" :description="description" @play-track="play" @pause-track="pause" />
+    <Header
+      :title="title"
+      :description="description" 
+      :currentTrack="currentTrack"
+      @play-track="play"
+      @pause-track="pause" />
     <main>
       <Playlist :tracks="tracks" @select-track="selectTrack" />
-      <Track :track="currentTrack" />
+      <Track :track="selectedTrack" />
     </main>
   </div>
 </template>
@@ -28,7 +33,8 @@ export default {
       title: "",
       description: "",
       tracks: [],
-      currentTrack: null
+      currentTrack: null,
+      selectedTrack: null
     }
   },
   async mounted() {
@@ -36,23 +42,25 @@ export default {
     this.title = data.title;
     this.description = data.description;
     this.tracks = data.tracks;
-    console.log(data);
+    // console.log(data);
   },
   methods: {
     selectTrack(track) {
       console.log(track);
       if (track) {
-        this.currentTrack = track;
+        this.selectedTrack = track;
       }
     },
     play() {
-      if (this.currentTrack) {
+      if (this.selectedTrack) {
+        this.currentTrack = this.selectedTrack;
         audioPlayer.play(this.currentTrack.stream_url);
       }
     },
     pause() {
-      if (this.currentTrack && audioPlayer.audio) {
+      if (this.currentTrack) {
         audioPlayer.muteAudio(0);
+        this.currentTrack = null;
       }
     }
   }
