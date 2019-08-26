@@ -17,7 +17,7 @@
     </nav>
   </div>
   <div class="header__bottom">
-    <Controls />
+    <Controls @play-track="$emit('play-track')" @pause-track="$emit('pause-track')" />
   </div>
 </div>
     

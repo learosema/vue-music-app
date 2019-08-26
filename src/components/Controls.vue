@@ -2,13 +2,13 @@
 <nav class="controls">
   <ul class="controls__menu">
     <li>
-      <button class="controls__button controls__button--play">
+      <button class="controls__button controls__button--play" @click="$emit('play-track')">
         <svg viewBox="0 0 128 128" width="48px" height="48px">
           <title>play</title>
           <path d="M39,16l50,50l-50,50Z" />
         </svg>
       </button>
-      <button class="controls__button controls__button--pause">
+      <button class="controls__button controls__button--pause" @click="$emit('pause-track')">
         <svg viewBox="0 0 128 128" width="48px" height="48px">
           <title>pause</title>
           <rect x="8" y="16" width="50" height="96" />

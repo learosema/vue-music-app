@@ -1,9 +1,11 @@
 // mostly adapted from my former codepen demo: 
 // https://codepen.io/terabaud/pen/BYdjdx?editors=0010
 
+import { clientId } from '../../soundcloud.config'
+
 class AudioPlayer {
 
-  constructor(AC) {
+  constructor() {
     this.audio = null;
     this.mediaSrc = null;
     this.gain = null;

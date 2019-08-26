@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :title="title" :description="description" />
+    <Header :title="title" :description="description" @play-track="play" @pause-track="pause" />
     <main>
       <Playlist :tracks="tracks" @select-track="selectTrack" />
       <Track :track="currentTrack" />
@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Playlist from './components/Playlist';
 import Track from './components/Track';
 import { resolve } from './utils/soundcloud';
+import { audioPlayer } from './utils/audio-player';
 
 const PLAYLIST = 'https://soundcloud.com/timpietrusky/sets/super-hot-shit';
 
@@ -42,6 +43,16 @@ export default {
       console.log(track);
       if (track) {
         this.currentTrack = track;
+      }
+    },
+    play() {
+      if (this.currentTrack) {
+        audioPlayer.play(this.currentTrack.stream_url);
+      }
+    },
+    pause() {
+      if (this.currentTrack && audioPlayer.audio) {
+        audioPlayer.muteAudio(0);
       }
     }
   }
