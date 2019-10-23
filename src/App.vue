@@ -4,6 +4,8 @@
       :title="title"
       :description="description" 
       :currentTrack="currentTrack"
+      :currentTime="currentTime"
+      :duration="duration"
       @play-track="play"
       @pause-track="pause" />
     <main>
@@ -37,6 +39,20 @@ export default {
       selectedTrack: null
     }
   },
+  computed: {
+    currentTime() {
+      if (audioPlayer.audio) {
+        return audioPlayer.audio.currentTime;
+      }
+      return NaN
+    },
+    duration() {
+      if (audioPlayer.audio) {
+        return audioPlayer.audio.duration;
+      }
+      return NaN
+    }
+  },
   async mounted() {
     const data = await resolve(PLAYLIST);
     this.title = data.title;
@@ -46,12 +62,14 @@ export default {
   },
   methods: {
     selectTrack(track) {
-      console.log(track);
       if (track) {
         this.selectedTrack = track;
       }
     },
     play() {
+      if (!this.selectedTrack && this.tracks.length > 0) {
+        this.selectTrack(this.tracks[0]);
+      }
       if (this.selectedTrack) {
         this.currentTrack = this.selectedTrack;
         audioPlayer.play(this.currentTrack.stream_url);
@@ -68,25 +86,5 @@ export default {
 </script>
 
 <style>
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 18px;
-  line-height: 1.8;
-  margin: 0;
-  color: #213;
-  background: #fff;
-}
-
-#app {
-  margin: 0;
-}
-
-
+@import 'css/app.css';
 </style>

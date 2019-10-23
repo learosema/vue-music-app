@@ -1,0 +1,81 @@
+.controls {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.controls__menu {
+  padding: 0;
+  margin: 0;
+  flex: 1 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.controls__menu li {
+  flex: 1;
+}
+
+.controls__menu li.controls__menu-item--progress {
+  flex: 3;
+}
+
+.controls__button {
+  background: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid deeppink;
+  margin: 4px;
+  padding: 0 6px;
+  height: 52px;
+}
+
+.controls__button:hover {
+  border: 2px solid yellow;
+}
+
+.controls__button:active {
+  border: 2px solid white;
+  fill: white;
+}
+
+.controls__button--play svg {
+  fill: deepskyblue;
+}
+
+.controls__button--pause svg {
+  fill: deeppink;
+}
+
+.controls__button:active svg {
+  fill: white;
+}
+
+/* todo: cross-browser styling, currently only webkit
+ * https://css-tricks.com/html5-progress-element/
+ */
+.controls__progress {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  align-items: center;
+  appearance: none;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.controls__progress::-webkit-progress-bar {
+  background: #222;
+  background: linear-gradient(to bottom, transparent 0%, transparent 25%, #222 25%, #222 75%, transparent 75%);
+}
+
+.controls__progress[value]::-webkit-progress-value {
+  background: hotpink;
+  background: linear-gradient(to bottom, transparent 0%, transparent 25%, hotpink 25%, deeppink 75%, transparent 75%);
+  background-size: 100%;
+}

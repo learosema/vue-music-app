@@ -13,7 +13,11 @@
       </div>
     </div>
     <div class="header__bottom">
-      <Controls @play-track="$emit('play-track')" @pause-track="$emit('pause-track')" />
+      <Controls 
+        @play-track="$emit('play-track')"
+        @pause-track="$emit('pause-track')"
+        :currentTime="currentTime"
+        :duration="duration" />
     </div>
   </div>  
 </template>
@@ -28,62 +32,13 @@ export default {
   props: {
     title: String,
     description: String,
-    currentTrack: Object
+    currentTrack: Object,
+    currentTime: Number,
+    duration: Number, 
   }
 }
 </script>
 
 <style>
-
-.header {
-  z-index: 1;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: var(--header-color);
-  color: white;
-  font-family: sans-serif;
-}
-
-.header__top {
-  margin: 0 auto;
-  height: calc(var(--header-height) / 2);
-  display: flex;
-  align-items: center;
-}
-
-.header__bottom {
-  background: var(--header-bottom-color);
-  display: flex;
-  align-items: center;
-  padding: 4px 32px;
-  height: calc(var(--header-height) / 2);
-}
-
-
-.header__title, .headler__logo {
-  flex: 0 1 auto;
-}
-
-.header__title {
-  align-items: center;
-}
-
-.header__title h1, h2 {
-  display: block;
-  font-size: 16px;
-  margin: 0;
-  padding: 0 8px;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.header__title h2 {
-
-  color: deepskyblue;
-}
-
+@import '../css/header.css';
 </style>

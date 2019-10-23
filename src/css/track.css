@@ -1,0 +1,39 @@
+
+.track {
+  position: fixed;
+  top: var(--header-height);
+  left: calc(100% - var(--track-pane-width));
+  right: 0;
+  height: calc(100vh - var(--header-height));
+  background: var(--track-background);
+  display: block;
+}
+
+.track__details {
+  position: relative;
+  margin: 16px;
+  padding: 8px;
+  display: block;
+  text-shadow: 2px 2px #000;
+}
+
+.track__cover {
+  position: relative;
+}
+
+.track__cover img {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -50%;
+  margin-top: -20%;
+  mix-blend-mode: multiply;
+  background: #777;
+  width: 100%;
+}
+
+.track h2, 
+.track p {
+  color: #fff;
+  margin: 0;
+}
